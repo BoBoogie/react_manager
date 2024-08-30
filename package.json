@@ -12,8 +12,11 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "antd": "^5.20.3",
+    "axios": "^1.7.5",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -27,6 +30,7 @@
     "globals": "^15.9.0",
     "husky": "^9.1.5",
     "prettier": "^3.3.3",
+    "sass": "^1.77.8",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
