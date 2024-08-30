@@ -3,8 +3,8 @@ import { Button } from 'antd';
 
 const Login = () => {
   const clickHandler = () => {
-    request.post('/users/login').then(r => {
-      console.log(r);
+    request.post<string>('/users/login').then(res => {
+      console.log(res);
     });
   };
   return (

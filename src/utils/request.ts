@@ -3,7 +3,7 @@ import { message } from 'antd';
 import { showLoading, hideLoading } from './Loading';
 
 const instance = axios.create({
-  baseURL: '/test',
+  baseURL: '/api',
   timeout: 8000,
   timeoutErrorMessage: '请求超时, 请稍后再试',
   withCredentials: true // 默认允许跨域
@@ -34,7 +34,7 @@ instance.interceptors.response.use(
     if (data.code === 500001) {
       message.error(data.msg);
       localStorage.removeItem('token');
-      location.href = '/login';
+      // location.href = '/login';
     } else if (data.code != 0) {
       message.error(data.msg);
       return Promise.reject(data);
@@ -49,10 +49,10 @@ instance.interceptors.response.use(
 );
 
 export default {
-  get(url: string, params?: object) {
+  get<T>(url: string, params?: object): Promise<T> {
     return instance.get(url, { params });
   },
-  post(url: string, data?: object) {
+  post<T>(url: string, data?: object): Promise<T> {
     return instance.post(url, data);
   }
 };
