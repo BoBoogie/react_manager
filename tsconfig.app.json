@@ -18,7 +18,12 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": "./", // 用于解析非相对模块名称的基目录
+    "paths": {
+      "@/*": ["src/*"]
+    } // 模块名到基于 baseUrl 的路径映射的列表
   },
   "include": ["src"]
 }
