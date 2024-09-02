@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('@/assets/images/login_bg.svg');
+  background-position: 50%;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  img {
+    max-width: 570px;
+    max-height: 278px;
+  }
+}
+
+.form {
+  text-align: center;
+  box-sizing: border-box;
+  width: 500px;
+  min-width: 200px;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 3px #c7c9cb4d;
+}

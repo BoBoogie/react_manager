@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Login from '@/views/Login';
+import Login from '@/views/login/Login';
 
 const router = createBrowserRouter([
   {
