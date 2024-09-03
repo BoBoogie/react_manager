@@ -3,18 +3,24 @@ import { message } from '@/utils/AntdGlobal';
 import api from '@/api';
 import { Login } from '@/types/api';
 import storage from '@/utils/storage.ts';
-const onFinish = async (values: Login.params) => {
-  const res = await api.login(values);
-  storage.set('token', res);
-  message.success('登录成功');
-  const params = new URLSearchParams(location.search);
-  location.href = params.get('callback') || '/welcome';
-};
+import { useState } from 'react';
 
-// const onFinishFailed = errorInfo => {
-//   console.log('Failed:', errorInfo);
-// };
 const LoginForm = () => {
+  const [loading, setLoading] = useState(false);
+  const onFinish = async (values: Login.params) => {
+    setLoading(true);
+    const res: any = await api.login(values);
+    if (res.code != 40001) {
+      setLoading(false);
+      storage.set('token', res);
+      await message.success('登录成功', 1);
+      const params = new URLSearchParams(location.search);
+      location.href = params.get('callback') || '/welcome';
+    } else {
+      setLoading(false);
+      message.error('用户名或密码错误');
+    }
+  };
   return (
     <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish} autoComplete="off">
       <Form.Item name="userName" rules={[{ required: true, message: '请输入用户名!' }]}>
@@ -26,7 +32,7 @@ const LoginForm = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button block type="primary" htmlType="submit">
+        <Button block type="primary" htmlType="submit" loading={loading}>
           登录
         </Button>
       </Form.Item>

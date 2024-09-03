@@ -25,5 +25,5 @@
       "@/*": ["src/*"]
     } // 模块名到基于 baseUrl 的路径映射的列表
   },
-  "include": ["src"]
+  "include": ["src", "typings.d.ts"]
 }
