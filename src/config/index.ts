@@ -18,23 +18,23 @@ const config = {
   dev: {
     baseApi: '/api',
     uploadApi: 'http://api-driver-dev.marsview.cc',
-    mock: false,
+    mock: true,
     cdn: 'http://xxx.aliyun.com',
-    mockApi: 'http://xxx.mock.com'
+    mockApi: 'http://127.0.0.1:4523/m1/5098174-0-default'
   },
   stg: {
     baseApi: '/api',
     uploadApi: 'http://api-driver-stg.marsview.cc',
     mock: false,
     cdn: 'http://xxx.aliyun.com',
-    mockApi: 'http://xxx.mock.com'
+    mockApi: 'http://127.0.0.1:4523/m1/5098174-0-default'
   },
   prod: {
     baseApi: '/api',
     uploadApi: 'http://api-driver.marsview.cc',
     mock: false,
     cdn: 'http://xxx.aliyun.com',
-    mockApi: 'http://xxx.mock.com'
+    mockApi: 'http://127.0.0.1:4523/m1/5098174-0-default'
   }
 };
 
