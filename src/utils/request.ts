@@ -1,9 +1,10 @@
 import axios, { AxiosError } from 'axios';
-import { message } from 'antd';
 import { showLoading, hideLoading } from './Loading';
 import storage from '@/utils/storage.ts';
 import env from '@/config';
 import { Result } from '@/types/api.ts';
+import { message } from '@/utils/AntdGlobal';
+
 const instance = axios.create({
   timeout: 8000,
   timeoutErrorMessage: '请求超时, 请稍后再试',

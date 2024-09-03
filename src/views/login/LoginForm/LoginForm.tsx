@@ -1,10 +1,10 @@
-import { Form, Button, Input, message } from 'antd';
+import { Form, Button, Input } from 'antd';
+import { message } from '@/utils/AntdGlobal';
 import api from '@/api';
 import { Login } from '@/types/api';
 import storage from '@/utils/storage.ts';
 const onFinish = async (values: Login.params) => {
   const res = await api.login(values);
-  console.log(res);
   storage.set('token', res);
   message.success('登录成功');
   const params = new URLSearchParams(location.search);
