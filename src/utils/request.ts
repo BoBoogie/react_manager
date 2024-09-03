@@ -3,9 +3,8 @@ import { message } from 'antd';
 import { showLoading, hideLoading } from './Loading';
 import storage from '@/utils/storage.ts';
 import env from '@/config';
-
+import { Result } from '@/types/api.ts';
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_API,
   timeout: 8000,
   timeoutErrorMessage: '请求超时, 请稍后再试',
   withCredentials: true // 默认允许跨域
@@ -20,7 +19,7 @@ instance.interceptors.request.use(
       config.headers.Authorization = 'Token::' + token;
     }
     if (env.mock) {
-      config.baseURL = env.mockApi;
+      config.baseURL = env.mockApi + env.baseApi;
     } else {
       config.baseURL = env.baseApi;
     }
@@ -36,12 +35,12 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   response => {
-    const data = response.data;
+    const data: Result = response.data;
     hideLoading();
     if (data.code === 500001) {
       message.error(data.msg);
       storage.remove('token');
-      // location.href = '/login';
+      location.href = '/login';
     } else if (data.code != 0) {
       message.error(data.msg);
       return Promise.reject(data);

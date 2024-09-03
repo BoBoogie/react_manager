@@ -1,14 +1,19 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Login from '@/views/login/Login';
+import Welcome from '@/views/welcome/Welcome.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div>welcome</div>
+    element: <Navigate to="/login" />
   },
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/welcome',
+    element: <Welcome />
   },
   {
     path: '*',

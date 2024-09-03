@@ -1,27 +1,28 @@
-import { FormProps } from 'antd';
-import { Form, Button, Input } from 'antd';
-
-type FieldType = {
-  username?: string;
-  password?: string;
+import { Form, Button, Input, message } from 'antd';
+import api from '@/api';
+import { Login } from '@/types/api';
+import storage from '@/utils/storage.ts';
+const onFinish = async (values: Login.params) => {
+  const res = await api.login(values);
+  console.log(res);
+  storage.set('token', res);
+  message.success('登录成功');
+  const params = new URLSearchParams(location.search);
+  location.href = params.get('callback') || '/welcome';
 };
 
-const onFinish: FormProps<FieldType>['onFinish'] = values => {
-  console.log('Success:', values);
-};
-
-const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
-  console.log('Failed:', errorInfo);
-};
+// const onFinishFailed = errorInfo => {
+//   console.log('Failed:', errorInfo);
+// };
 const LoginForm = () => {
   return (
-    <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
-      <Form.Item<FieldType> name="username" rules={[{ required: true, message: '请输入用户名!' }]}>
-        <Input />
+    <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish} autoComplete="off">
+      <Form.Item name="userName" rules={[{ required: true, message: '请输入用户名!' }]}>
+        <Input placeholder="用户名" />
       </Form.Item>
 
-      <Form.Item<FieldType> name="password" rules={[{ required: true, message: '请输入密码!' }]}>
-        <Input.Password />
+      <Form.Item name="userPwd" rules={[{ required: true, message: '请输入密码!' }]}>
+        <Input.Password placeholder="密码" />
       </Form.Item>
 
       <Form.Item>
