@@ -3,7 +3,7 @@ import React from 'react';
 import { Layout, theme, Watermark } from 'antd';
 import LayoutHeader from '@/layout/Header';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 // const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map((icon, index) => ({
 //   key: String(index + 1),
@@ -32,9 +32,7 @@ const App: React.FC = () => {
           {/*<Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />*/}
         </Sider>
         <Layout>
-          <Header className="h-18" style={{ padding: 0, background: colorBgContainer }}>
-            <LayoutHeader />
-          </Header>
+          <LayoutHeader />
           <Content style={{ margin: '24px 16px 0' }}>
             <div
               style={{

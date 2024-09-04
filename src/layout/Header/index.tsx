@@ -1,7 +1,12 @@
 import { MenuFoldOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+import { MenuProps, theme } from 'antd';
 import { Switch, Dropdown, Breadcrumb } from 'antd';
+import { Layout } from 'antd';
 const LayoutHeader = () => {
+  const {
+    token: { colorBgContainer }
+  } = theme.useToken();
+  const { Header } = Layout;
   const breadList = [
     {
       title: '首页'
@@ -21,7 +26,7 @@ const LayoutHeader = () => {
     }
   ];
   return (
-    <div className="flex items-center justify-between h-18 pl-5 pr-5">
+    <Header className="flex items-center justify-between h-18 pl-5 pr-5" style={{ background: colorBgContainer }}>
       <div className="flex">
         <MenuFoldOutlined />
         <Breadcrumb className="ml-2.5" items={breadList}></Breadcrumb>
@@ -32,7 +37,7 @@ const LayoutHeader = () => {
           <span className="cursor-pointer ">admin</span>
         </Dropdown>
       </div>
-    </div>
+    </Header>
   );
 };
 
