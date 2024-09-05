@@ -28,7 +28,8 @@ const App: React.FC = () => {
           }}
           onCollapse={(collapsed, type) => {
             console.log(collapsed, type);
-          }}>
+          }}
+        >
           <div className="demo-logo-vertical" />
           {/*<Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />*/}
         </Sider>
@@ -41,7 +42,8 @@ const App: React.FC = () => {
                 minHeight: 360,
                 background: colorBgContainer,
                 borderRadius: borderRadiusLG
-              }}>
+              }}
+            >
               content
             </div>
           </Content>

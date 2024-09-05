@@ -1,15 +1,14 @@
 .aContainer {
+  :global(a) {
+    color: #b0aeae;
+    margin: 0 12px;
 
-	:global(a) {
-		color: #B0AEAE;
-		margin: 0 12px;
+    &:hover {
+      color: #9d68d3;
+    }
+  }
 
-		&:hover {
-			color: #9D68D3;
-		}
-	}
-
-	:global(.gutter) {
-		margin: 0 10px;
-	}
+  :global(.gutter) {
+    margin: 0 10px;
+  }
 }
