@@ -26,10 +26,10 @@ const LayoutHeader = () => {
     }
   ];
   return (
-    <Header className="flex items-center justify-between h-18 pl-5 pr-5" style={{ background: colorBgContainer }}>
+    <Header className="flex items-center justify-between h-[50px] pl-[20px] pr-[40px]" style={{ background: colorBgContainer }}>
       <div className="flex">
         <MenuFoldOutlined />
-        <Breadcrumb className="ml-2.5" items={breadList}></Breadcrumb>
+        <Breadcrumb className="ml-[10px]" items={breadList}></Breadcrumb>
       </div>
       <div className="">
         <Switch className="mr-5" checkedChildren="暗黑" unCheckedChildren="默认"></Switch>

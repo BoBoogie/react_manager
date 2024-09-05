@@ -2,8 +2,9 @@ import React from 'react';
 // import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, theme, Watermark } from 'antd';
 import LayoutHeader from '@/layout/Header';
+import LayoutFooter from '@/layout/Footer';
 
-const { Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 // const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map((icon, index) => ({
 //   key: String(index + 1),
@@ -44,7 +45,7 @@ const App: React.FC = () => {
               content
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©{new Date().getFullYear()} Created by Ant UED</Footer>
+          <LayoutFooter />
         </Layout>
       </Layout>
     </Watermark>
