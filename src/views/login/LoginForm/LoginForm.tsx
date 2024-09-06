@@ -3,14 +3,24 @@ import { message } from '@/utils/AntdGlobal';
 import api from '@/api';
 import { Login } from '@/types/api';
 import storage from '@/utils/storage.ts';
+import { useState } from 'react';
 
 const LoginForm = () => {
+  const [loading, setLoading] = useState(false);
   const onFinish = async (values: Login.params) => {
-    const res: any = await api.login(values);
-    storage.set('token', res);
-    await message.success('登录成功', 1);
-    const params = new URLSearchParams(location.search);
-    location.href = params.get('callback') || '/welcome';
+    try {
+      setLoading(true);
+      const res: any = await api.login(values);
+      setLoading(false);
+      storage.set('token', res);
+      await message.success('登录成功', 1);
+      const params = new URLSearchParams(location.search);
+      location.href = params.get('callback') || '/welcome';
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+      return;
+    }
   };
   return (
     <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish} autoComplete="off">
@@ -23,7 +33,7 @@ const LoginForm = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button block type="primary" htmlType="submit">
+        <Button block type="primary" htmlType="submit" loading={loading}>
           登录
         </Button>
       </Form.Item>
