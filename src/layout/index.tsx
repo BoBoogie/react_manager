@@ -3,6 +3,7 @@ import React from 'react';
 import { Layout, theme, Watermark } from 'antd';
 import LayoutHeader from '@/layout/Header';
 import LayoutFooter from '@/layout/Footer';
+import LayoutMenu from '@/layout/Menu';
 
 const { Content, Sider } = Layout;
 
@@ -28,10 +29,9 @@ const App: React.FC = () => {
           }}
           onCollapse={(collapsed, type) => {
             console.log(collapsed, type);
-          }}
-        >
+          }}>
           <div className="demo-logo-vertical" />
-          {/*<Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />*/}
+          <LayoutMenu />
         </Sider>
         <Layout>
           <LayoutHeader />
@@ -42,8 +42,7 @@ const App: React.FC = () => {
                 minHeight: 360,
                 background: colorBgContainer,
                 borderRadius: borderRadiusLG
-              }}
-            >
+              }}>
               content
             </div>
           </Content>
