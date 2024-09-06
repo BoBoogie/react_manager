@@ -18,7 +18,8 @@ const App: React.FC = () => {
           }}
           onCollapse={(collapsed, type) => {
             console.log(collapsed, type);
-          }}>
+          }}
+        >
           <div className="demo-logo-vertical" />
           <LayoutMenu />
         </Sider>
