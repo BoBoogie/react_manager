@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 const LayoutFooter = () => {
   const { Footer } = Layout;
   return (
-    <Footer className="text-center leading-[30px] text-[#B0AEAE]">
+    <Footer className="text-center leading-[30px] text-[#B0AEAE] p-[20px_50px_0]">
       <div className={classes.aContainer}>
         <a href="https://www.imooc.com/u/1343480" target="_blank" rel="noreferrer">
           河畔一角主页

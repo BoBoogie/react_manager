@@ -1,23 +1,12 @@
 import React from 'react';
-// import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import { Layout, theme, Watermark } from 'antd';
+import { Layout, Watermark } from 'antd';
 import LayoutHeader from '@/layout/Header';
 import LayoutFooter from '@/layout/Footer';
 import LayoutMenu from '@/layout/Menu';
+import { Outlet } from 'react-router-dom';
 
 const { Content, Sider } = Layout;
-
-// const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map((icon, index) => ({
-//   key: String(index + 1),
-//   icon: React.createElement(icon),
-//   label: `nav ${index + 1}`
-// }));
-
 const App: React.FC = () => {
-  const {
-    token: { colorBgContainer, borderRadiusLG }
-  } = theme.useToken();
-
   return (
     <Watermark content="admin">
       <Layout>
@@ -35,18 +24,12 @@ const App: React.FC = () => {
         </Sider>
         <Layout>
           <LayoutHeader />
-          <Content style={{ margin: '24px 16px 0' }}>
-            <div
-              style={{
-                padding: 24,
-                minHeight: 360,
-                background: colorBgContainer,
-                borderRadius: borderRadiusLG
-              }}>
-              content
+          <Content className="h-[calc(100vh-50px)] p-[20px] overflow-auto">
+            <div className="h-[calc(100vh-190px)]">
+              <Outlet></Outlet>
             </div>
+            <LayoutFooter />
           </Content>
-          <LayoutFooter />
         </Layout>
       </Layout>
     </Watermark>

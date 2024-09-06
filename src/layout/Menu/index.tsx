@@ -28,7 +28,7 @@ const LayoutMenu = () => {
   return (
     <div>
       <div className="flex items-center h-[50px] text-[18px] text-[#FFF] cursor-pointer" onClick={clickLogoHandler}>
-        <HeatMapOutlined className="ml-[16px] mr-[16px] text-[32px]" />
+        <HeatMapOutlined className="m-[0_16px] text-[32px]" />
         <span>波波货运</span>
       </div>
       <Menu defaultSelectedKeys={['1']} mode="inline" theme="dark" items={items} />
