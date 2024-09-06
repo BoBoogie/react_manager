@@ -1,7 +1,9 @@
 import classes from './index.module.scss';
+import { Layout } from 'antd';
 const LayoutFooter = () => {
+  const { Footer } = Layout;
   return (
-    <div className="text-center leading-[30px] text-[#B0AEAE]">
+    <Footer className="text-center leading-[30px] text-[#B0AEAE]">
       <div className={classes.aContainer}>
         <a href="https://www.imooc.com/u/1343480" target="_blank" rel="noreferrer">
           河畔一角主页
@@ -20,7 +22,7 @@ const LayoutFooter = () => {
         </a>
       </div>
       <div>Copyright ©{new Date().getFullYear()} React18通用后台课程 All Rights Reserved.</div>
-    </div>
+    </Footer>
   );
 };
 
