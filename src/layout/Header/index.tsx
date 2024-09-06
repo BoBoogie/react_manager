@@ -2,11 +2,13 @@ import { MenuFoldOutlined } from '@ant-design/icons';
 import { MenuProps, theme } from 'antd';
 import { Switch, Dropdown, Breadcrumb } from 'antd';
 import { Layout } from 'antd';
+import useBearStore from '@/store';
 const LayoutHeader = () => {
   const {
     token: { colorBgContainer }
   } = theme.useToken();
   const { Header } = Layout;
+  const userInfo = useBearStore(state => state.userInfo);
   const breadList = [
     {
       title: '首页'
@@ -18,10 +20,14 @@ const LayoutHeader = () => {
   const items: MenuProps['items'] = [
     {
       key: '1',
-      label: <span>邮箱：vongzain.bo@gmail.com</span>
+      label: <span>{'邮箱：' + userInfo.userEmail}</span>
     },
     {
       key: '2',
+      label: <span>{'手机号：' + userInfo.mobile}</span>
+    },
+    {
+      key: '3',
       label: <span>退出</span>
     }
   ];
@@ -34,7 +40,7 @@ const LayoutHeader = () => {
       <div className="">
         <Switch className="mr-5" checkedChildren="暗黑" unCheckedChildren="默认"></Switch>
         <Dropdown menu={{ items }} trigger={['click']}>
-          <span className="cursor-pointer ">admin</span>
+          <span className="cursor-pointer">{userInfo.userName}</span>
         </Dropdown>
       </div>
     </Header>

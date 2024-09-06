@@ -1,5 +1,17 @@
 import welcome from '@/assets/images/welcome.svg';
+import { useEffect } from 'react';
+import api from '@/api';
+import useBearStore from '@/store';
+
 const Welcome = () => {
+  const setUserInfo = useBearStore(state => state.setUserInfo);
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+  const getUserInfo = async () => {
+    const res = await api.getUserInfo();
+    setUserInfo(res);
+  };
   return (
     <div className="flex items-center justify-center  bg-white rounded-[5px] h-[calc(100vh-170px)]">
       <div className="mt-[-60px]">
