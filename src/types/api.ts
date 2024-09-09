@@ -50,3 +50,12 @@ export namespace User {
     lastLoginTime?: number | string;
   }
 }
+
+export namespace OrderType {
+  export interface ReportData {
+    driverCount: number;
+    totalMoney: number;
+    orderCount: number;
+    cityNum: number;
+  }
+}

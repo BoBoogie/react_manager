@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Login from '@/views/login/Login';
-import Welcome from '@/views/welcome/Welcome.tsx';
+import Index from '@/views/login';
+import Welcome from '@/views/welcome';
+import Dashboard from '@/views/dashboard';
 import Layout from '@/layout';
 
 const router = createBrowserRouter([
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <Login />
+    element: <Index />
   },
   {
     element: <Layout />,
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: '/welcome',
         element: <Welcome />
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />
       }
     ]
   },
