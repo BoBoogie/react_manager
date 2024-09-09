@@ -12,15 +12,7 @@ const App: React.FC = () => {
   return (
     <Watermark content={userInfo.userName}>
       <Layout>
-        <Sider
-          breakpoint="lg"
-          collapsedWidth="0"
-          onBreakpoint={broken => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}>
+        <Sider breakpoint="lg" collapsedWidth="0">
           <div className="demo-logo-vertical" />
           <LayoutMenu />
         </Sider>
