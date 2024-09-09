@@ -1,10 +1,10 @@
 import welcome from '@/assets/images/welcome.svg';
 import { useEffect } from 'react';
 import api from '@/api';
-import useBearStore from '@/store';
+import useStore from '@/store';
 
 const Welcome = () => {
-  const setUserInfo = useBearStore(state => state.setUserInfo);
+  const setUserInfo = useStore(state => state.setUserInfo);
   useEffect(() => {
     getUserInfo();
   }, []);

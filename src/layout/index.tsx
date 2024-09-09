@@ -4,11 +4,13 @@ import LayoutHeader from '@/layout/Header';
 import LayoutFooter from '@/layout/Footer';
 import LayoutMenu from '@/layout/Menu';
 import { Outlet } from 'react-router-dom';
+import useStore from '@/store';
 
 const { Content, Sider } = Layout;
 const App: React.FC = () => {
+  const userInfo = useStore(state => state.userInfo);
   return (
-    <Watermark content="admin">
+    <Watermark content={userInfo.userName}>
       <Layout>
         <Sider
           breakpoint="lg"
@@ -18,8 +20,7 @@ const App: React.FC = () => {
           }}
           onCollapse={(collapsed, type) => {
             console.log(collapsed, type);
-          }}
-        >
+          }}>
           <div className="demo-logo-vertical" />
           <LayoutMenu />
         </Sider>

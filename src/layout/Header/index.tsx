@@ -2,13 +2,13 @@ import { MenuFoldOutlined } from '@ant-design/icons';
 import { MenuProps, theme } from 'antd';
 import { Switch, Dropdown, Breadcrumb } from 'antd';
 import { Layout } from 'antd';
-import useBearStore from '@/store';
+import useStore from '@/store';
 const LayoutHeader = () => {
   const {
     token: { colorBgContainer }
   } = theme.useToken();
   const { Header } = Layout;
-  const userInfo = useBearStore(state => state.userInfo);
+  const userInfo = useStore(state => state.userInfo);
   const breadList = [
     {
       title: '首页'
