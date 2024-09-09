@@ -27,7 +27,7 @@ const App: React.FC = () => {
         <Layout>
           <LayoutHeader />
           <Content className="h-[calc(100vh-50px)] p-[20px] overflow-auto">
-            <div className="h-[calc(100vh-170px)]">
+            <div className="min-h-[calc(100vh-100px)]">
               <Outlet></Outlet>
             </div>
             <LayoutFooter />
