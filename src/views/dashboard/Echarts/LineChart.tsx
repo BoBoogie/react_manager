@@ -2,6 +2,7 @@ import useCharts from '@/hook/useCharts.tsx';
 import { OrderType } from '@/types/api.ts';
 import { useEffect, useState } from 'react';
 import api from '@/api';
+import { Button, Card } from 'antd';
 
 const LineChart = () => {
   const [lineData, setLineData] = useState<OrderType.LineData>();
@@ -11,6 +12,9 @@ const LineChart = () => {
   const getLineData = async () => {
     const res = await api.getLineData();
     setLineData(res);
+  };
+  const refreshHandler = () => {
+    getLineData();
   };
   const option = {
     tooltip: {
@@ -49,7 +53,17 @@ const LineChart = () => {
     ]
   };
   const [lineChartRef] = useCharts(option, lineData);
-  return <div ref={lineChartRef} className="h-[400px]"></div>;
+  return (
+    <Card
+      title="订单和流水走势图"
+      extra={
+        <Button type="primary" onClick={refreshHandler}>
+          刷新
+        </Button>
+      }>
+      <div ref={lineChartRef} className="h-[400px]"></div>
+    </Card>
+  );
 };
 
 export default LineChart;

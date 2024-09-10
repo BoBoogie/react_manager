@@ -1,12 +1,11 @@
-import { Button, Card, Descriptions, DescriptionsProps } from 'antd';
+import { Descriptions, DescriptionsProps } from 'antd';
 import useStore from '@/store';
 import api from '@/api';
 import { useEffect, useState } from 'react';
 import { OrderType } from '@/types/api.ts';
 import { formatMoney, formatNum } from '@/utils';
 import LineChart from '@/views/dashboard/Echarts/LineChart.tsx';
-import PieChartCity from '@/views/dashboard/Echarts/PieChartCity.tsx';
-import PieChartAge from '@/views/dashboard/Echarts/PieChartAge.tsx';
+import PieChart from '@/views/dashboard/Echarts/PieChart.tsx';
 import RadarChart from '@/views/dashboard/Echarts/RadarChart.tsx';
 
 const Dashboard = () => {
@@ -76,22 +75,13 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="mt-[50px]">
-        <Card title="订单和流水走势图" extra={<Button type="primary">刷新</Button>}>
-          <LineChart />
-        </Card>
+        <LineChart />
       </div>
       <div className="mt-[50px]">
-        <Card title="司机分布" extra={<Button type="primary">刷新</Button>}>
-          <div className="flex text-center  h-[400px]">
-            <PieChartCity />
-            <PieChartAge />
-          </div>
-        </Card>
+        <PieChart />
       </div>
       <div className="mt-[50px]">
-        <Card title="模型诊断" extra={<Button type="primary">刷新</Button>}>
-          <RadarChart />
-        </Card>
+        <RadarChart />
       </div>
     </div>
   );

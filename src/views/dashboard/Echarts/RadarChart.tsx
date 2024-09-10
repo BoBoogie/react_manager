@@ -2,6 +2,7 @@ import useCharts from '@/hook/useCharts.tsx';
 import { useEffect, useState } from 'react';
 import { OrderType } from '@/types/api.ts';
 import api from '@/api';
+import { Button, Card } from 'antd';
 
 const RadarChart = () => {
   const [radarData, setRadarData] = useState<OrderType.RadarData>();
@@ -11,6 +12,9 @@ const RadarChart = () => {
   const getRadarData = async () => {
     const res = await api.getRadarData();
     setRadarData(res);
+  };
+  const refreshHandler = () => {
+    getRadarData();
   };
   const option = {
     legend: {
@@ -29,7 +33,17 @@ const RadarChart = () => {
     ]
   };
   const [RadarChartRef] = useCharts(option, radarData);
-  return <div ref={RadarChartRef} className="h-[400px]"></div>;
+  return (
+    <Card
+      title="模型诊断"
+      extra={
+        <Button type="primary" onClick={refreshHandler}>
+          刷新
+        </Button>
+      }>
+      <div ref={RadarChartRef} className="h-[400px]"></div>
+    </Card>
+  );
 };
 
 export default RadarChart;
