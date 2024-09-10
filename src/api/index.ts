@@ -20,5 +20,29 @@ export default {
    */
   getReportData() {
     return request.get<OrderType.ReportData>('/order/dashboard/getReportData');
+  },
+  /**
+   * 获取折线图数据
+   */
+  getLineData() {
+    return request.get<OrderType.LineData>('/order/dashboard/getLineData');
+  },
+  /**
+   * 获取饼图1数据
+   */
+  getPieCityData() {
+    return request.get<OrderType.PieData[]>('/order/dashboard/getPieCityData');
+  },
+  /**
+   * 获取饼图2数据
+   */
+  getPieAgeData() {
+    return request.get<OrderType.PieData[]>('/order/dashboard/getPieAgeData');
+  },
+  /**
+   * 获取雷达图数据
+   */
+  getRadarData() {
+    return request.get<OrderType.RadarData>('/order/dashboard/getRadarData');
   }
 };

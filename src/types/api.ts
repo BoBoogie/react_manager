@@ -52,6 +52,22 @@ export namespace User {
 }
 
 export namespace OrderType {
+  export interface LineData {
+    label: string[];
+    order: number[];
+    money: number[];
+  }
+  export interface PieData {
+    name: string;
+    value: number[];
+  }
+  export interface RadarData {
+    indicator: Array<{ name: string; max: number }>;
+    data: {
+      name: string;
+      value: number[];
+    };
+  }
   export interface ReportData {
     driverCount: number;
     totalMoney: number;

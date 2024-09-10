@@ -1,160 +1,18 @@
-import { Descriptions, Card, DescriptionsProps, Button } from 'antd';
+import { Button, Card, Descriptions, DescriptionsProps } from 'antd';
 import useStore from '@/store';
 import api from '@/api';
-import * as echarts from 'echarts';
 import { useEffect, useState } from 'react';
 import { OrderType } from '@/types/api.ts';
 import { formatMoney, formatNum } from '@/utils';
+import LineChart from '@/views/dashboard/Echarts/LineChart.tsx';
+import PieChartCity from '@/views/dashboard/Echarts/PieChartCity.tsx';
+import PieChartAge from '@/views/dashboard/Echarts/PieChartAge.tsx';
+import RadarChart from '@/views/dashboard/Echarts/RadarChart.tsx';
 
 const Dashboard = () => {
   const userInfo = useStore(state => state.userInfo);
   const [report, setReport] = useState<OrderType.ReportData>();
   useEffect(() => {
-    const lineChartDom = document.getElementById('lineChart');
-    const chartInstance = echarts.init(lineChartDom as HTMLElement);
-    chartInstance.setOption({
-      tooltip: {
-        trigger: 'axis'
-      },
-      legend: {
-        data: ['订单', '流水']
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {}
-        }
-      },
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          name: '订单',
-          type: 'line',
-          stack: 'Total',
-          data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
-        },
-        {
-          name: '流水',
-          type: 'line',
-          stack: 'Total',
-          data: [220, 182, 191, 234, 290, 330, 310, 380, 400, 430, 470, 290]
-        }
-      ]
-    });
-    const pieChartCityDom = document.getElementById('pieChartCity');
-    const pieChartCityInstance = echarts.init(pieChartCityDom as HTMLElement);
-    pieChartCityInstance.setOption({
-      title: {
-        text: '司机城市分布',
-        left: 'center'
-      },
-      tooltip: {
-        trigger: 'item'
-      },
-      legend: {
-        orient: 'vertical',
-        left: 'left'
-      },
-      series: [
-        {
-          name: '城市分布',
-          type: 'pie',
-          radius: '50%',
-          data: [
-            { value: 1048, name: '北京' },
-            { value: 735, name: '上海' },
-            { value: 580, name: '广州' },
-            { value: 484, name: '深圳' },
-            { value: 300, name: '南京' }
-          ],
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }
-      ]
-    });
-    const pieChartAgeDom = document.getElementById('pieChartAge');
-    const pieChartAgeInstance = echarts.init(pieChartAgeDom as HTMLElement);
-    pieChartAgeInstance.setOption({
-      title: {
-        text: '司机年龄分布',
-        left: 'center'
-      },
-      tooltip: {
-        trigger: 'item'
-      },
-      legend: {
-        orient: 'vertical',
-        left: 'left'
-      },
-      series: [
-        {
-          name: '年龄分布',
-          type: 'pie',
-          radius: [50, 150],
-          roseType: 'radius',
-          data: [
-            { value: 1048, name: '20-30' },
-            { value: 735, name: '30-40' },
-            { value: 580, name: '40-50' },
-            { value: 484, name: '50-60' },
-            { value: 300, name: '60-70' }
-          ],
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }
-      ]
-    });
-    const radarChartDom = document.getElementById('radarChart');
-    const radarChartInstance = echarts.init(radarChartDom as HTMLElement);
-    radarChartInstance.setOption({
-      legend: {
-        data: ['司机模型诊断'],
-        left: 'left'
-      },
-      radar: {
-        indicator: [
-          { name: '服务态度', max: 10 },
-          { name: '在线时长', max: 720 },
-          { name: '接单率', max: 300 },
-          { name: '评分', max: 5 },
-          { name: '关注度', max: 10000 }
-        ]
-      },
-      series: [
-        {
-          name: '司机模型诊断',
-          type: 'radar',
-          data: [
-            {
-              value: [9, 600, 240, 4.6, 8607],
-              name: '司机模型诊断'
-            }
-          ]
-        }
-      ]
-    });
     getReportData();
   }, []);
   const getReportData = async () => {
@@ -219,20 +77,20 @@ const Dashboard = () => {
       </div>
       <div className="mt-[50px]">
         <Card title="订单和流水走势图" extra={<Button type="primary">刷新</Button>}>
-          <div id="lineChart" className="h-[400px]"></div>
+          <LineChart />
         </Card>
       </div>
       <div className="mt-[50px]">
         <Card title="司机分布" extra={<Button type="primary">刷新</Button>}>
           <div className="flex text-center  h-[400px]">
-            <div id="pieChartCity" className="flex-1"></div>
-            <div id="pieChartAge" className="flex-1"></div>
+            <PieChartCity />
+            <PieChartAge />
           </div>
         </Card>
       </div>
       <div className="mt-[50px]">
         <Card title="模型诊断" extra={<Button type="primary">刷新</Button>}>
-          <div id="radarChart" className="h-[400px]"></div>
+          <RadarChart />
         </Card>
       </div>
     </div>
