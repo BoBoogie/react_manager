@@ -7,6 +7,16 @@ export interface Result<T = any> {
   data: T;
   msg: string;
 }
+
+// 通用分页列表
+export interface ResultData<T> {
+  list: T[];
+  page: {
+    pageNum: number;
+    pageSize: number;
+    total: number | 0;
+  };
+}
 //分页请求参数
 export interface PageParams {
   pageNum: number | undefined;

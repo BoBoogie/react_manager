@@ -1,5 +1,5 @@
 import request from '@/utils/request.ts';
-import { Login, User, OrderType } from '@/types/api.ts';
+import { Login, User, OrderType, ResultData } from '@/types/api.ts';
 
 export default {
   /**
@@ -44,5 +44,12 @@ export default {
    */
   getRadarData() {
     return request.get<OrderType.RadarData>('/order/dashboard/getRadarData');
+  },
+  /**
+   * 获取用户列表
+   * @param params
+   */
+  getUserList(params?: User.Params) {
+    return request.get<ResultData<User.UserItem>>('/users/list', params);
   }
 };

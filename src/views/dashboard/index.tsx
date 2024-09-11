@@ -51,7 +51,7 @@ const Dashboard = () => {
     }
   ];
   return (
-    <div className="bg-white p-[20px]">
+    <div className="bg-white p-[20px] rounded-[5px]">
       <div className="flex items-center">
         <img className="w-[80px] h-[80px] mr-[25px]" src={userInfo.userImg} alt="" />
         <Descriptions className="pb-[16px]" title={'欢迎' + userInfo.userName + '，每天都要开心！'} items={items} />;

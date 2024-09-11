@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Index from '@/views/login';
 import Welcome from '@/views/welcome';
 import Dashboard from '@/views/dashboard';
+import User from '@/views/system/user';
 import Layout from '@/layout';
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />
+      },
+      {
+        path: '/user',
+        element: <User />
       }
     ]
   },

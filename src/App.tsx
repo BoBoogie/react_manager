@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { RouterProvider } from 'react-router-dom';
 import router from '@/router/index';
 import { ConfigProvider, App as AntdApp } from 'antd';
@@ -11,8 +11,7 @@ function App() {
         token: {
           colorPrimary: '#9D68D3'
         }
-      }}
-    >
+      }}>
       <AntdApp>
         <AntdGlobal></AntdGlobal>
         <RouterProvider router={router} />

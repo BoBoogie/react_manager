@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.base-table {
+	border-radius: 5px;
+	background: #ffffff;
+
+	.header-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 15px;
+		border-radius: 5px 5px 0 0;
+	}
+}
