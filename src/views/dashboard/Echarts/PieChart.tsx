@@ -90,7 +90,8 @@ const PieChart = () => {
         <Button type="primary" onClick={refreshHandler}>
           刷新
         </Button>
-      }>
+      }
+    >
       <div className="flex text-center  h-[400px]">
         <div ref={pieChartCityRef} className="flex-1"></div>
         <div ref={pieChartAgeRef} className="flex-1"></div>

@@ -60,7 +60,8 @@ const LineChart = () => {
         <Button type="primary" onClick={refreshHandler}>
           刷新
         </Button>
-      }>
+      }
+    >
       <div ref={lineChartRef} className="h-[400px]"></div>
     </Card>
   );

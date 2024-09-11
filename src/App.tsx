@@ -11,7 +11,8 @@ function App() {
         token: {
           colorPrimary: '#9D68D3'
         }
-      }}>
+      }}
+    >
       <AntdApp>
         <AntdGlobal></AntdGlobal>
         <RouterProvider router={router} />

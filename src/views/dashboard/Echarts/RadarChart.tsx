@@ -40,7 +40,8 @@ const RadarChart = () => {
         <Button type="primary" onClick={refreshHandler}>
           刷新
         </Button>
-      }>
+      }
+    >
       <div ref={RadarChartRef} className="h-[400px]"></div>
     </Card>
   );
