@@ -5,13 +5,45 @@ import { useEffect, useState } from 'react';
 import api from '@/api';
 
 const UserList = () => {
+  const [form] = Form.useForm();
   const [data, setData] = useState<User.UserItem[]>();
+  const [total, setTotal] = useState(0);
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10
+  });
   useEffect(() => {
-    getUserList();
-  }, []);
-  const getUserList = async () => {
-    const res = await api.getUserList();
+    getUserList({
+      pageNum: pagination.current,
+      pageSize: pagination.pageSize
+    });
+  }, [pagination.current, pagination.pageSize]);
+  const getUserList = async (params: User.Params) => {
+    const values = form.getFieldsValue();
+    const res = await api.getUserList({
+      ...values,
+      pageNum: params?.pageNum || 1,
+      pageSize: params?.pageSize || 10
+    });
     setData(res.list);
+    setTotal(res.page.total);
+    setPagination({
+      current: res.page.pageNum,
+      pageSize: res.page.pageSize
+    });
+  };
+  const searchHandler = async () => {
+    await getUserList({
+      pageNum: 1,
+      pageSize: pagination.pageSize
+    });
+  };
+  const resetHandler = () => {
+    form.resetFields();
+    getUserList({
+      pageNum: pagination.current,
+      pageSize: pagination.pageSize
+    });
   };
   const columns: ColumnsType<User.UserItem> = [
     {
@@ -91,7 +123,7 @@ const UserList = () => {
   return (
     <div>
       <div className="bg-white p-[20px] rounded-[5px] mb-[20px]">
-        <Form layout="inline" initialValues={{ state: 0 }}>
+        <Form layout="inline" initialValues={{ state: 0 }} form={form}>
           <Form.Item name="userId" label="用户ID">
             <Input type="text" />
           </Form.Item>
@@ -108,8 +140,10 @@ const UserList = () => {
           </Form.Item>
           <Form.Item>
             <Space>
-              <Button type="primary">搜索</Button>
-              <Button>重置</Button>
+              <Button type="primary" htmlType="submit" onClick={searchHandler}>
+                搜索
+              </Button>
+              <Button onClick={resetHandler}>重置</Button>
             </Space>
           </Form.Item>
         </Form>
@@ -126,7 +160,30 @@ const UserList = () => {
             </Space>
           </div>
         </div>
-        <Table bordered rowSelection={{ type: 'checkbox' }} dataSource={data} columns={columns} rowKey="userId" />
+        <Table
+          bordered
+          rowSelection={{ type: 'checkbox' }}
+          dataSource={data}
+          columns={columns}
+          rowKey="userId"
+          pagination={{
+            position: ['bottomRight'],
+            current: pagination.current,
+            pageSize: pagination.pageSize,
+            total,
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => {
+              return `总共${total}条`;
+            },
+            onChange: (page, pageSize) => {
+              setPagination({
+                current: page,
+                pageSize
+              });
+            }
+          }}
+        />
       </div>
     </div>
   );
