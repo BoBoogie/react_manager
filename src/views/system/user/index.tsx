@@ -244,7 +244,8 @@ const UserList = () => {
           getUserList({
             pageNum: 1
           });
-        }}></CreateUser>
+        }}
+      ></CreateUser>
     </div>
   );
 };

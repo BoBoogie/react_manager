@@ -143,7 +143,8 @@ const CreatUser = (props: IModelProp) => {
             showUploadList={false}
             action="http://127.0.0.1:4523/m1/5098174-0-default/api/users/upload"
             beforeUpload={beforeUpload}
-            onChange={handleChange}>
+            onChange={handleChange}
+          >
             {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%', borderRadius: '100%' }} /> : uploadButton}
           </Upload>
         </Form.Item>
