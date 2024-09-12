@@ -45,7 +45,7 @@ export namespace User {
     state?: number;
     roleList?: string[];
     deptId?: string[];
-    userImg: string;
+    userImg?: string;
   }
   // 修改用户参数
   export interface EditParams extends CreateParams {

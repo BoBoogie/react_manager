@@ -1,30 +1,35 @@
 import { Form, Button, Input, Select, Table, Space } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { User } from '@/types/api.ts';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import api from '@/api';
 import CreateUser from '@/views/system/user/CreateUser.tsx';
+import { IAction } from '@/types/modal.ts';
+import { message, modal } from '@/utils/AntdGlobal.tsx';
 
 const UserList = () => {
   const [form] = Form.useForm();
   const [data, setData] = useState<User.UserItem[]>();
   const [total, setTotal] = useState(0);
+  const [userIds, setUserIds] = useState<number[]>([]);
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10
   });
+  const userRef = useRef<{ open: (type: IAction, data?: User.UserItem) => void }>();
   useEffect(() => {
     getUserList({
       pageNum: pagination.current,
       pageSize: pagination.pageSize
     });
   }, [pagination.current, pagination.pageSize]);
+  // 获取用户列表
   const getUserList = async (params: User.Params) => {
     const values = form.getFieldsValue();
     const res = await api.getUserList({
       ...values,
-      pageNum: params?.pageNum || 1,
-      pageSize: params?.pageSize || 10
+      pageNum: params?.pageNum,
+      pageSize: params?.pageSize || pagination.pageSize
     });
     setData(res.list);
     setTotal(res.page.total);
@@ -33,17 +38,54 @@ const UserList = () => {
       pageSize: res.page.pageSize
     });
   };
+  // 搜索
   const searchHandler = async () => {
     await getUserList({
-      pageNum: 1,
-      pageSize: pagination.pageSize
+      pageNum: 1
     });
   };
+  // 重置
   const resetHandler = () => {
     form.resetFields();
     getUserList({
-      pageNum: pagination.current,
-      pageSize: pagination.pageSize
+      pageNum: pagination.current
+    });
+  };
+  // 新增
+  const createHandler = () => {
+    userRef.current?.open('create');
+  };
+  // 编辑
+  const editHandler = (record: User.UserItem) => {
+    userRef.current?.open('edit', record);
+  };
+  // 删除
+  const deleteHandler = (userId: number) => {
+    modal.confirm({
+      title: '确定删除该用户？',
+      onOk: () => deleteHandelSubmit([userId])
+    });
+  };
+  // 批量删除
+  const batchDeleteHandler = () => {
+    if (userIds.length === 0) {
+      message.warning('请选择要删除的用户！');
+    } else {
+      modal.confirm({
+        title: '确定删除该批用户吗？',
+        onOk: () => {
+          // 重置选择
+          setUserIds([]);
+          deleteHandelSubmit(userIds);
+        }
+      });
+    }
+  };
+  const deleteHandelSubmit = async (ids: number[]) => {
+    await api.userDel({ userIds: ids });
+    message.success('删除成功!');
+    getUserList({
+      pageNum: 1
     });
   };
   const columns: ColumnsType<User.UserItem> = [
@@ -106,14 +148,15 @@ const UserList = () => {
     },
     {
       title: '操作',
-      dataIndex: 'handler',
       align: 'center',
       key: 'handler',
-      render() {
+      render(record) {
         return (
           <Space>
-            <Button type="text">编辑</Button>
-            <Button type="text" danger>
+            <Button type="text" onClick={() => editHandler(record)}>
+              编辑
+            </Button>
+            <Button type="text" danger onClick={() => deleteHandler(record)}>
               删除
             </Button>
           </Space>
@@ -121,6 +164,7 @@ const UserList = () => {
       }
     }
   ];
+
   return (
     <div>
       <div className="bg-white p-[20px] rounded-[5px] mb-[20px]">
@@ -154,8 +198,10 @@ const UserList = () => {
           <div className="title">用户列表</div>
           <div className="action">
             <Space>
-              <Button type="primary">新增</Button>
-              <Button type="primary" danger>
+              <Button type="primary" onClick={createHandler}>
+                新增
+              </Button>
+              <Button type="primary" danger onClick={batchDeleteHandler}>
                 批量删除
               </Button>
             </Space>
@@ -163,7 +209,13 @@ const UserList = () => {
         </div>
         <Table
           bordered
-          rowSelection={{ type: 'checkbox' }}
+          rowSelection={{
+            type: 'checkbox',
+            selectedRowKeys: userIds,
+            onChange: (selectedRowKeys: React.Key[]) => {
+              setUserIds(selectedRowKeys as number[]);
+            }
+          }}
           dataSource={data}
           columns={columns}
           rowKey="userId"
@@ -186,7 +238,13 @@ const UserList = () => {
           }}
         />
       </div>
-      <CreateUser></CreateUser>
+      <CreateUser
+        modalRef={userRef}
+        update={() => {
+          getUserList({
+            pageNum: 1
+          });
+        }}></CreateUser>
     </div>
   );
 };

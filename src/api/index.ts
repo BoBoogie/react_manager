@@ -51,5 +51,26 @@ export default {
    */
   getUserList(params?: User.Params) {
     return request.get<ResultData<User.UserItem>>('/users/list', params);
+  },
+  /**
+   * 新增用户
+   * @param params
+   */
+  userCreate(params: User.CreateParams) {
+    return request.post('/users/create', params);
+  },
+  /**
+   * 编辑用户
+   * @param params
+   */
+  userEdit(params: User.EditParams) {
+    return request.post('/users/edit', params);
+  },
+  /**
+   * 删除用户
+   * @param params
+   */
+  userDel(params: { userIds: number[] }) {
+    return request.post('/users/delete', params);
   }
 };
