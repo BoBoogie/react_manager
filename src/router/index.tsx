@@ -8,7 +8,7 @@ import Layout from '@/layout';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/welcome" />
+    element: <Navigate to="/login" />
   },
   {
     path: '/login',

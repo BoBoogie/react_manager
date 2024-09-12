@@ -3,6 +3,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { User } from '@/types/api.ts';
 import { useEffect, useState } from 'react';
 import api from '@/api';
+import CreateUser from '@/views/system/user/CreateUser.tsx';
 
 const UserList = () => {
   const [form] = Form.useForm();
@@ -125,10 +126,10 @@ const UserList = () => {
       <div className="bg-white p-[20px] rounded-[5px] mb-[20px]">
         <Form layout="inline" initialValues={{ state: 0 }} form={form}>
           <Form.Item name="userId" label="用户ID">
-            <Input type="text" />
+            <Input type="text" placeholder="请输入用户ID" />
           </Form.Item>
           <Form.Item name="userName" label="用户名称">
-            <Input type="text" />
+            <Input type="text" placeholder="请输入用户名称" />
           </Form.Item>
           <Form.Item name="state" label="状态">
             <Select style={{ width: 120 }}>
@@ -185,6 +186,7 @@ const UserList = () => {
           }}
         />
       </div>
+      <CreateUser></CreateUser>
     </div>
   );
 };
