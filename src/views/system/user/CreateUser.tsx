@@ -1,12 +1,13 @@
-import { Form, Modal, Input, Select, Upload } from 'antd';
+import type { GetProp, UploadProps } from 'antd';
+import { Form, Input, Modal, Select, Upload } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useImperativeHandle, useState } from 'react';
-import type { GetProp, UploadProps } from 'antd';
-type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 import { message } from '@/utils/AntdGlobal.tsx';
 import { IAction, IModelProp } from '@/types/modal.ts';
 import { User } from '@/types/api.ts';
 import api from '@/api';
+
+type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
 const normFile = (e: any) => {
   if (Array.isArray(e)) {
@@ -114,7 +115,8 @@ const CreatUser = (props: IModelProp) => {
           rules={[
             { required: true, message: '请输入用户名称' },
             { min: 5, max: 12, message: '用户名称最小5个字符，最大12个字符' }
-          ]}>
+          ]}
+        >
           <Input type="text" placeholder="请输入用户名称" disabled={action === 'edit'} />
         </Form.Item>
         <Form.Item
@@ -124,7 +126,8 @@ const CreatUser = (props: IModelProp) => {
             { required: true, message: '请输入邮箱' },
             { type: 'email', message: '请输入正确邮箱' },
             { pattern: /^\w+@mars.com$/, message: '邮箱必须以@mars.com结尾' }
-          ]}>
+          ]}
+        >
           <Input type="text" placeholder="请输入邮箱" disabled={action === 'edit'} />
         </Form.Item>
         <Form.Item
@@ -133,7 +136,8 @@ const CreatUser = (props: IModelProp) => {
           rules={[
             { len: 11, message: '请输入11位手机号' },
             { pattern: /1[1-9]\d{9}/, message: '请输入1开头的11位手机号' }
-          ]}>
+          ]}
+        >
           <Input type="number" placeholder="请输入手机号" />
         </Form.Item>
         <Form.Item label="部门" name="deptId">
@@ -162,7 +166,8 @@ const CreatUser = (props: IModelProp) => {
             showUploadList={false}
             action="http://127.0.0.1:4523/m1/5098174-0-default/api/users/upload"
             beforeUpload={beforeUpload}
-            onChange={handleChange}>
+            onChange={handleChange}
+          >
             {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%', borderRadius: '100%' }} /> : uploadButton}
           </Upload>
         </Form.Item>
