@@ -9,11 +9,11 @@ import useStore from '@/store';
 const { Content, Sider } = Layout;
 const App: React.FC = () => {
   const userInfo = useStore(state => state.userInfo);
+  const collapsed = useStore(state => state.collapsed);
   return (
     <Watermark content={userInfo.userName}>
       <Layout>
-        <Sider breakpoint="lg" collapsedWidth="0">
-          <div className="demo-logo-vertical" />
+        <Sider collapsible collapsed={collapsed}>
           <LayoutMenu />
         </Sider>
         <Layout>

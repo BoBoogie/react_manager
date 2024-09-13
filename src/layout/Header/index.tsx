@@ -1,4 +1,4 @@
-import { MenuFoldOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { MenuProps, theme } from 'antd';
 import { Switch, Dropdown, Breadcrumb } from 'antd';
 import { Layout } from 'antd';
@@ -9,6 +9,8 @@ const LayoutHeader = () => {
   } = theme.useToken();
   const { Header } = Layout;
   const userInfo = useStore(state => state.userInfo);
+  const collapsed = useStore(state => state.collapsed);
+  const setCollapsed = useStore(state => state.setCollapsed);
   const breadList = [
     {
       title: '首页'
@@ -33,8 +35,10 @@ const LayoutHeader = () => {
   ];
   return (
     <Header className="flex items-center justify-between h-[50px] pl-[20px] pr-[40px]" style={{ background: colorBgContainer }}>
-      <div className="flex">
-        <MenuFoldOutlined />
+      <div className="flex items-center">
+        <div className="cursor-pointer" onClick={() => setCollapsed(!collapsed)}>
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </div>
         <Breadcrumb className="ml-[10px]" items={breadList}></Breadcrumb>
       </div>
       <div className="">
