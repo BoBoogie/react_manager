@@ -1,5 +1,5 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { MenuProps, theme } from 'antd';
+import { Button, MenuProps, theme } from 'antd';
 import { Switch, Dropdown, Breadcrumb } from 'antd';
 import { Layout } from 'antd';
 import useStore from '@/store';
@@ -34,14 +34,14 @@ const LayoutHeader = () => {
     }
   ];
   return (
-    <Header className="flex items-center justify-between h-[50px] pl-[20px] pr-[40px]" style={{ background: colorBgContainer }}>
+    <Header className="flex items-center justify-between h-[50px] pl-[5px] pr-[40px]" style={{ background: colorBgContainer }}>
       <div className="flex items-center">
-        <div className="cursor-pointer" onClick={() => setCollapsed(!collapsed)}>
+        <Button type="text" onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </div>
-        <Breadcrumb className="ml-[10px]" items={breadList}></Breadcrumb>
+        </Button>
+        <Breadcrumb className="ml-[5px]" items={breadList}></Breadcrumb>
       </div>
-      <div className="">
+      <div>
         <Switch className="mr-5" checkedChildren="暗黑" unCheckedChildren="默认"></Switch>
         <Dropdown menu={{ items }} trigger={['click']}>
           <span className="cursor-pointer">{userInfo.userName}</span>

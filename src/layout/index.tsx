@@ -13,7 +13,7 @@ const App: React.FC = () => {
   return (
     <Watermark content={userInfo.userName}>
       <Layout>
-        <Sider collapsible collapsed={collapsed}>
+        <Sider collapsible collapsed={collapsed} trigger={null}>
           <LayoutMenu />
         </Sider>
         <Layout>
