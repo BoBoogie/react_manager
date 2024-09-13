@@ -1,5 +1,5 @@
 import request from '@/utils/request.ts';
-import { Login, User, OrderType, ResultData } from '@/types/api.ts';
+import { Login, User, OrderType, ResultData, Dept } from '@/types/api.ts';
 
 export default {
   /**
@@ -72,5 +72,33 @@ export default {
    */
   userDel(params: { userIds: number[] }) {
     return request.post('/users/delete', params);
+  },
+  /**
+   * 获取部门列表
+   * @param params
+   */
+  getDeptList(params?: Dept.Params) {
+    return request.get<Dept.DeptItem[]>('/dept/list', params);
+  },
+  /**
+   * 创建部门列表
+   * @param params
+   */
+  createDept(params: Dept.CreateParams) {
+    return request.post('/dept/create', params);
+  },
+  /**
+   * 编辑部门
+   * @param params
+   */
+  editDept(params: Dept.EditParams) {
+    return request.post('/dept/edit', params);
+  },
+  /**
+   * 删除部门
+   * @param params
+   */
+  delDeptById(params: Dept.DelParams) {
+    return request.post('/dept/delete', params);
   }
 };

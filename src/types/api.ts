@@ -60,7 +60,7 @@ export namespace User {
     lastLoginTime?: number | string;
   }
 }
-
+// 订单接口
 export namespace OrderType {
   export interface LineData {
     label: string[];
@@ -83,5 +83,26 @@ export namespace OrderType {
     totalMoney: number;
     orderCount: number;
     cityNum: number;
+  }
+}
+// 部门接口
+export namespace Dept {
+  export interface Params {
+    deptName?: string;
+  }
+  export interface CreateParams {
+    parentId?: string;
+    deptName: number;
+    userName: string;
+  }
+  export interface EditParams extends CreateParams {
+    _id: string;
+  }
+  export interface DelParams {
+    _id: string;
+  }
+  export interface DeptItem extends CreateParams {
+    _id: string;
+    children?: DeptItem[];
   }
 }

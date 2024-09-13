@@ -25,7 +25,7 @@ export const formatDate = (date?: Date | string, rule?: string) => {
   else if (date) curDate = new Date(date);
 
   let fmt = rule || 'yyyy-MM-dd HH:mm:ss';
-  fmt = fmt.replace(/(y+)/, curDate.getFullYear.toString());
+  fmt = fmt.replace(/(y+)/, curDate.getFullYear().toString());
   type OType = {
     [key: string]: number;
   };

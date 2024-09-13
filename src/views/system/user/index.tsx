@@ -6,6 +6,7 @@ import api from '@/api';
 import CreateUser from '@/views/system/user/CreateUser.tsx';
 import { IAction } from '@/types/modal.ts';
 import { message, modal } from '@/utils/AntdGlobal.tsx';
+import { formatDate } from '@/utils';
 
 const UserList = () => {
   const [form] = Form.useForm();
@@ -138,13 +139,19 @@ const UserList = () => {
       title: '注册时间',
       dataIndex: 'createTime',
       align: 'center',
-      key: 'createTime'
+      key: 'createTime',
+      render(createTime) {
+        return formatDate(createTime);
+      }
     },
     {
       title: '最后登录时间',
       dataIndex: 'lastLoginTime',
       align: 'center',
-      key: 'lastLoginTime'
+      key: 'lastLoginTime',
+      render(lastLoginTime) {
+        return formatDate(lastLoginTime);
+      }
     },
     {
       title: '操作',
@@ -244,8 +251,7 @@ const UserList = () => {
           getUserList({
             pageNum: 1
           });
-        }}
-      ></CreateUser>
+        }}></CreateUser>
     </div>
   );
 };
