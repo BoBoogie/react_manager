@@ -1,18 +1,25 @@
 import { Menu } from 'antd';
-import { DesktopOutlined, SettingOutlined, TeamOutlined, HeatMapOutlined } from '@ant-design/icons';
+import { HomeOutlined, DesktopOutlined, SettingOutlined, TeamOutlined, HeatMapOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import useStore from '@/store';
+import { useState } from 'react';
 const LayoutMenu = () => {
   const navigate = useNavigate();
   const collapsed = useStore(state => state.collapsed);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const items = [
+    {
+      key: '/welcome',
+      icon: <HomeOutlined />,
+      label: '首页'
+    },
     {
       key: '/dashboard',
       icon: <DesktopOutlined />,
       label: '工作台'
     },
     {
-      key: '2',
+      key: '/system',
       icon: <SettingOutlined />,
       label: '系统管理',
       children: [
@@ -30,18 +37,20 @@ const LayoutMenu = () => {
     }
   ];
   const clickLogoHandler = () => {
+    setSelectedKeys(['/welcome']);
     navigate('/welcome');
   };
   const clickMenuHandler = ({ key }: { key: string }) => {
+    setSelectedKeys([key]);
     navigate(key);
   };
   return (
     <div>
       <div className="flex items-center h-[50px] text-[18px] text-[#FFF] cursor-pointer" onClick={clickLogoHandler}>
         <HeatMapOutlined className="m-[0_16px] text-[32px]" />
-        {collapsed ? <span></span> : <span>波波货运</span>}
+        {collapsed ? <span></span> : <span className="whitespace-nowrap">波波货运</span>}
       </div>
-      <Menu mode="inline" theme="dark" items={items} onSelect={clickMenuHandler} />
+      <Menu mode="inline" theme="dark" items={items} onSelect={clickMenuHandler} defaultSelectedKeys={['/welcome']} selectedKeys={selectedKeys} />
     </div>
   );
 };
