@@ -1,12 +1,13 @@
 import { Menu } from 'antd';
 import { HomeOutlined, DesktopOutlined, SettingOutlined, TeamOutlined, HeatMapOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useStore from '@/store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const LayoutMenu = () => {
   const navigate = useNavigate();
   const collapsed = useStore(state => state.collapsed);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>(['/welcome']);
+  const { pathname } = useLocation();
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const items = [
     {
       key: '/welcome',
@@ -36,6 +37,9 @@ const LayoutMenu = () => {
       ]
     }
   ];
+  useEffect(() => {
+    setSelectedKeys([pathname]);
+  }, []);
   const clickLogoHandler = () => {
     setSelectedKeys(['/welcome']);
     navigate('/welcome');
@@ -50,7 +54,7 @@ const LayoutMenu = () => {
         <HeatMapOutlined className="m-[0_16px] text-[32px]" />
         {collapsed ? <span></span> : <span className="whitespace-nowrap">波波货运</span>}
       </div>
-      <Menu mode="inline" theme="dark" items={items} onSelect={clickMenuHandler} defaultSelectedKeys={['/welcome']} selectedKeys={selectedKeys} />
+      <Menu mode="inline" theme="dark" items={items} onSelect={clickMenuHandler} selectedKeys={selectedKeys} />
     </div>
   );
 };
