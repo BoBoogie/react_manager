@@ -1,13 +1,17 @@
 import { Button, Form, Input, Space, Table } from 'antd';
-import type { Dept } from '@/types/api.ts';
-import { useEffect, useState } from 'react';
-import api from '@/api';
 import { ColumnsType } from 'antd/es/table';
+import { Dept } from '@/types/api.ts';
+import { useEffect, useRef, useState } from 'react';
+import api from '@/api';
 import { formatDate } from '@/utils';
+import { IAction } from '@/types/modal.ts';
+import { modal } from '@/utils/AntdGlobal.tsx';
+import CreateDept from '@/views/system/dept/CreateDept.tsx';
 
-const Dept = () => {
+const DeptList = () => {
   const [form] = Form.useForm();
   const [data, setData] = useState<Dept.DeptItem[]>();
+  const deptRef = useRef<{ open: (type: IAction, data?: Dept.EditParams | { parentId: string }) => void }>();
   useEffect(() => {
     getDeptList();
   }, []);
@@ -15,10 +19,28 @@ const Dept = () => {
     const res = await api.getDeptList();
     setData(res);
   };
-  const searchHandler = () => {};
-  const resetHandler = () => {};
-  const createHandler = () => {};
-  const batchDeleteHandler = () => {};
+  const searchHandler = () => {
+    getDeptList();
+  };
+  const resetHandler = () => {
+    form.resetFields();
+    getDeptList();
+  };
+  const createHandler = (id: string) => {
+    deptRef.current?.open('create', { parentId: id });
+  };
+  const editHandler = (record: Dept.DeptItem) => {
+    deptRef.current?.open('edit', record);
+  };
+  const deleteHandler = (id: string) => {
+    modal.confirm({
+      title: '确定删除该部门？',
+      onOk: async () => {
+        await api.delDeptById({ _id: id });
+        getDeptList();
+      }
+    });
+  };
   const columns: ColumnsType<Dept.DeptItem> = [
     {
       title: '部门名称',
@@ -57,12 +79,16 @@ const Dept = () => {
       align: 'center',
       key: 'handler',
       width: '230px',
-      render() {
+      render(record) {
         return (
           <Space>
-            <Button type="text">新增</Button>
-            <Button type="text">编辑</Button>
-            <Button type="text" danger>
+            <Button type="text" onClick={() => createHandler(record._id)}>
+              新增
+            </Button>
+            <Button type="text" onClick={() => editHandler(record)}>
+              编辑
+            </Button>
+            <Button type="text" danger onClick={() => deleteHandler(record._id)}>
               删除
             </Button>
           </Space>
@@ -92,19 +118,21 @@ const Dept = () => {
           <div className="title">部门列表</div>
           <div className="action">
             <Space>
-              <Button type="primary" onClick={createHandler}>
+              <Button type="primary" onClick={() => createHandler}>
                 新增
-              </Button>
-              <Button type="primary" danger onClick={batchDeleteHandler}>
-                批量删除
               </Button>
             </Space>
           </div>
         </div>
-        <Table bordered dataSource={data} columns={columns}></Table>
+        <Table bordered dataSource={data} columns={columns} rowKey="deptName"></Table>
       </div>
+      <CreateDept
+        modalRef={deptRef}
+        update={() => {
+          getDeptList();
+        }}></CreateDept>
     </div>
   );
 };
 
-export default Dept;
+export default DeptList;

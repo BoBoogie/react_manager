@@ -16,7 +16,7 @@ const normFile = (e: any) => {
   return e?.fileList;
 };
 
-const CreatUser = (props: IModelProp) => {
+const CreatUser = (props: IModelProp<User.UserItem>) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -114,7 +114,7 @@ const CreatUser = (props: IModelProp) => {
           name="userName"
           rules={[
             { required: true, message: '请输入用户名称' },
-            { min: 5, max: 12, message: '用户名称最小5个字符，最大12个字符' }
+            { min: 2, max: 12, message: '用户名称最小2个字符，最大12个字符' }
           ]}>
           <Input type="text" placeholder="请输入用户名称" disabled={action === 'edit'} />
         </Form.Item>
@@ -124,7 +124,7 @@ const CreatUser = (props: IModelProp) => {
           rules={[
             { required: true, message: '请输入邮箱' },
             { type: 'email', message: '请输入正确邮箱' },
-            { pattern: /^\w+@mars.com$/, message: '邮箱必须以@mars.com结尾' }
+            { pattern: /^\w+([-+.]\w+)@gmail.com$/, message: '邮箱必须以@gmail.com结尾' }
           ]}>
           <Input type="text" placeholder="请输入邮箱" disabled={action === 'edit'} />
         </Form.Item>

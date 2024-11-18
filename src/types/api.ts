@@ -87,7 +87,7 @@ export namespace OrderType {
 }
 // 部门接口
 export namespace Dept {
-  export interface Params {
+  export interface Params extends PageParams {
     deptName?: string;
   }
   export interface CreateParams {
@@ -103,6 +103,8 @@ export namespace Dept {
   }
   export interface DeptItem extends CreateParams {
     _id: string;
+    createTime?: string;
+    updateTime?: string;
     children?: DeptItem[];
   }
 }

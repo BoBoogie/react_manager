@@ -100,5 +100,12 @@ export default {
    */
   delDeptById(params: Dept.DelParams) {
     return request.post('/dept/delete', params);
+  },
+  /**
+   * 获取全量用户列表
+   * @param params
+   */
+  getAllUserList(params?: User.Params) {
+    return request.get<User.UserItem[]>('/users/all/list', params);
   }
 };
