@@ -103,7 +103,7 @@ const CreatUser = (props: IModelProp) => {
   };
 
   return (
-    <Modal title="新增用户" width={800} open={visible} onOk={submitHandler} onCancel={cancelHandler} okText="确认" cancelText="取消">
+    <Modal title={action === 'create' ? '新增用户' : '编辑用户'} width={800} open={visible} onOk={submitHandler} onCancel={cancelHandler} okText="确认" cancelText="取消">
       <Form labelCol={{ span: 4 }} labelAlign="right" form={form}>
         {/*隐藏域*/}
         <Form.Item name="userId" hidden>
@@ -115,8 +115,7 @@ const CreatUser = (props: IModelProp) => {
           rules={[
             { required: true, message: '请输入用户名称' },
             { min: 5, max: 12, message: '用户名称最小5个字符，最大12个字符' }
-          ]}
-        >
+          ]}>
           <Input type="text" placeholder="请输入用户名称" disabled={action === 'edit'} />
         </Form.Item>
         <Form.Item
@@ -126,8 +125,7 @@ const CreatUser = (props: IModelProp) => {
             { required: true, message: '请输入邮箱' },
             { type: 'email', message: '请输入正确邮箱' },
             { pattern: /^\w+@mars.com$/, message: '邮箱必须以@mars.com结尾' }
-          ]}
-        >
+          ]}>
           <Input type="text" placeholder="请输入邮箱" disabled={action === 'edit'} />
         </Form.Item>
         <Form.Item
@@ -136,8 +134,7 @@ const CreatUser = (props: IModelProp) => {
           rules={[
             { len: 11, message: '请输入11位手机号' },
             { pattern: /1[1-9]\d{9}/, message: '请输入1开头的11位手机号' }
-          ]}
-        >
+          ]}>
           <Input type="number" placeholder="请输入手机号" />
         </Form.Item>
         <Form.Item label="部门" name="deptId">
@@ -166,8 +163,7 @@ const CreatUser = (props: IModelProp) => {
             showUploadList={false}
             action="http://127.0.0.1:4523/m1/5098174-0-default/api/users/upload"
             beforeUpload={beforeUpload}
-            onChange={handleChange}
-          >
+            onChange={handleChange}>
             {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%', borderRadius: '100%' }} /> : uploadButton}
           </Upload>
         </Form.Item>
