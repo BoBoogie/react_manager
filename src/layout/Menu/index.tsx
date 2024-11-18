@@ -6,7 +6,7 @@ import { useState } from 'react';
 const LayoutMenu = () => {
   const navigate = useNavigate();
   const collapsed = useStore(state => state.collapsed);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>(['/welcome']);
   const items = [
     {
       key: '/welcome',
