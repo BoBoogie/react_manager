@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import { HomeOutlined, DesktopOutlined, SettingOutlined, TeamOutlined, HeatMapOutlined } from '@ant-design/icons';
+import { HomeOutlined, DesktopOutlined, SettingOutlined, TeamOutlined, HeatMapOutlined, SendOutlined, MenuOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useStore from '@/store';
 import { useEffect, useState } from 'react';
@@ -31,8 +31,13 @@ const LayoutMenu = () => {
         },
         {
           key: '/dept',
-          icon: <TeamOutlined />,
+          icon: <SendOutlined />,
           label: '部门管理'
+        },
+        {
+          key: '/menu',
+          icon: <MenuOutlined />,
+          label: '菜单管理'
         }
       ]
     }
