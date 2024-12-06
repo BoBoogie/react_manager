@@ -5,7 +5,7 @@ import { ColumnsType } from 'antd/es/table';
 import { MenuType } from '@/types/api.ts';
 import api from '@/api';
 import CreateMenu from '@/views/system/menu/CreateMenu.tsx';
-import { modal } from '@/utils/AntdGlobal.tsx';
+import { message, modal } from '@/utils/AntdGlobal.tsx';
 
 const MenuList: React.FC = () => {
   useEffect(() => {
@@ -13,8 +13,8 @@ const MenuList: React.FC = () => {
   }, []);
   const [form] = Form.useForm();
   const [data, setData] = useState<MenuType.MenuItem[]>();
-  const getMenuList = async () => {
-    const res = await api.getMenuList();
+  const getMenuList = async (params?: MenuType.Params) => {
+    const res = await api.getMenuList(params);
     setData(res);
   };
   const columns: ColumnsType<MenuType.MenuItem> = [
@@ -90,7 +90,7 @@ const MenuList: React.FC = () => {
             <Button type="text" onClick={() => editHandler(record)}>
               编辑
             </Button>
-            <Button type="text" danger onClick={() => deleteHandler()}>
+            <Button type="text" danger onClick={() => deleteHandler(record)}>
               删除
             </Button>
           </Space>
@@ -98,26 +98,36 @@ const MenuList: React.FC = () => {
       }
     }
   ];
-  const searchHandler = () => {};
-  const resetHandler = () => {};
+  const searchHandler = () => {
+    const params = {
+      ...form.getFieldsValue()
+    };
+    getMenuList(params);
+  };
+  const resetHandler = () => {
+    form.resetFields();
+    getMenuList();
+  };
   const createHandler = async (record?: MenuType.MenuItem) => {
     const createModal = modal.confirm({
       title: <div>新增菜单</div>,
       width: 800,
       icon: null,
       closable: true,
+      footer: null,
       content: (
         <CreateMenu
           info={record}
-          onOk={() => {
+          onOk={async params => {
+            await api.createMenu(params);
+            message.success('新增菜单成功!');
             createModal.destroy();
           }}
           onCancel={() => {
             createModal.destroy();
           }}
         />
-      ),
-      footer: null
+      )
     });
   };
   const editHandler = async (record: MenuType.MenuItem) => {
@@ -126,27 +136,40 @@ const MenuList: React.FC = () => {
       width: 800,
       icon: null,
       closable: true,
+      footer: null,
       content: (
         <CreateMenu
           info={record}
-          onOk={() => {
+          onOk={async params => {
+            await api.editMenu(params);
+            message.success('编辑菜单成功!');
             editModal.destroy();
+            await getMenuList();
           }}
           onCancel={() => {
             editModal.destroy();
+            getMenuList();
           }}
         />
-      ),
-      footer: null
+      )
     });
   };
-  const deleteHandler = () => {};
+  const deleteHandler = (record: { _id: string }) => {
+    modal.confirm({
+      title: '确定删除该菜单？',
+      onOk: async () => {
+        await api.delMenuById({ _id: record?._id });
+        message.success('删除菜单成功!');
+        await getMenuList();
+      }
+    });
+  };
 
   return (
     <div>
       <div className="bg-white p-[20px] rounded-[5px] mb-[20px]">
         <Form layout="inline" initialValues={{ state: 1 }} form={form}>
-          <Form.Item label="角色名称">
+          <Form.Item label="菜单名称" name="menuName">
             <Input type="text" placeholder="请输入角色名称"></Input>
           </Form.Item>
           <Form.Item name="state" label="菜单状态">
@@ -167,7 +190,7 @@ const MenuList: React.FC = () => {
       </div>
       <div className="base-table">
         <div className="header-wrapper">
-          <div className="title">用户列表</div>
+          <div className="title">菜单列表</div>
           <div className="action">
             <Space>
               <Button type="primary" onClick={() => createHandler()}>

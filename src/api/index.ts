@@ -114,5 +114,26 @@ export default {
    */
   getMenuList(params?: MenuType.Params) {
     return request.get<MenuType.MenuItem[]>('/menu/list', params);
+  },
+  /**
+   * 创建菜单
+   * @param params
+   */
+  createMenu(params: MenuType.CreateParams) {
+    return request.post('/menu/create', params);
+  },
+  /**
+   * 修改菜单
+   * @param params
+   */
+  editMenu(params: MenuType.EditParams) {
+    return request.post('/menu/edit', params);
+  },
+  /**
+   * 删除菜单
+   * @param params
+   */
+  delMenuById(params: MenuType.DelParams) {
+    return request.post('/menu/delete', params);
   }
 };

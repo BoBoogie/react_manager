@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { MenuType } from '@/types/api.ts';
 import { Button, Form, Input, Space } from 'antd';
 interface CreateMenuProps {
-  onOk: () => void;
+  onOk: (params: MenuType.CreateParams) => void;
   onCancel: () => void;
   info?: MenuType.MenuItem;
 }
@@ -15,16 +15,13 @@ const CreateMenu: React.FC<CreateMenuProps> = ({ info, onOk, onCancel }) => {
   const submitHandler = async () => {
     try {
       await form.validateFields();
-      onOk();
-      form.resetFields();
+      const params = {
+        ...form.getFieldsValue()
+      };
+      onOk(params);
     } catch (error) {
       console.log('Validation failed:', error);
     }
-  };
-  // 取消
-  const cancelHandler = () => {
-    onCancel();
-    form.resetFields();
   };
   return (
     <div>
@@ -62,7 +59,7 @@ const CreateMenu: React.FC<CreateMenuProps> = ({ info, onOk, onCancel }) => {
       </Form>
       <div style={{ textAlign: 'right' }}>
         <Space>
-          <Button onClick={() => cancelHandler()}>取消</Button>
+          <Button onClick={onCancel}>取消</Button>
           <Button type="primary" onClick={() => submitHandler()}>
             确定
           </Button>
