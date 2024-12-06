@@ -1,5 +1,5 @@
 import request from '@/utils/request.ts';
-import { Login, User, OrderType, ResultData, Dept } from '@/types/api.ts';
+import { Login, User, OrderType, ResultData, Dept, MenuType } from '@/types/api.ts';
 
 export default {
   /**
@@ -107,5 +107,12 @@ export default {
    */
   getAllUserList(params?: User.Params) {
     return request.get<User.UserItem[]>('/users/all/list', params);
+  },
+  /**
+   * 获取菜单列表
+   * @param params
+   */
+  getMenuList(params?: MenuType.Params) {
+    return request.get<MenuType.MenuItem[]>('/menu/list', params);
   }
 };
