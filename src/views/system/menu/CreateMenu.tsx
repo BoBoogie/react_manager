@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { MenuType } from '@/types/api.ts';
-import { Button, Form, Input, Space } from 'antd';
+import { Button, Form, Input, InputNumber, Radio, Space, Tooltip } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 interface CreateMenuProps {
   onOk: (params: MenuType.CreateParams) => void;
   onCancel: () => void;
@@ -30,7 +31,11 @@ const CreateMenu: React.FC<CreateMenuProps> = ({ info, onOk, onCancel }) => {
           <Input />
         </Form.Item>
         <Form.Item label="菜单类型" name="menuType">
-          <Input />
+          <Radio.Group defaultValue={1}>
+            <Radio value={1}>菜单</Radio>
+            <Radio value={2}>按钮</Radio>
+            <Radio value={3}>页面</Radio>
+          </Radio.Group>
         </Form.Item>
         <Form.Item
           label="菜单名称"
@@ -50,11 +55,23 @@ const CreateMenu: React.FC<CreateMenuProps> = ({ info, onOk, onCancel }) => {
         <Form.Item label="组件地址" name="component">
           <Input placeholder="请输入组件地址" />
         </Form.Item>
-        <Form.Item label="排序" name="menuCode">
-          <Input placeholder="请输入序号" />
+        <Form.Item
+          label={
+            <div>
+              排序&nbsp;
+              <Tooltip title="排序值越大越靠后">
+                <InfoCircleOutlined className="text-[#9A9A9A]" />
+              </Tooltip>
+            </div>
+          }
+          name="menuCode">
+          <InputNumber />
         </Form.Item>
         <Form.Item label="菜单状态" name="menuState">
-          <Input placeholder="请输入菜单状态" />
+          <Radio.Group defaultValue={1}>
+            <Radio value={1}>正常</Radio>
+            <Radio value={2}>停用</Radio>
+          </Radio.Group>
         </Form.Item>
       </Form>
       <div style={{ textAlign: 'right' }}>
