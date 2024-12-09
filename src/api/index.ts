@@ -1,5 +1,5 @@
 import request from '@/utils/request.ts';
-import { Login, User, OrderType, ResultData, Dept, MenuType } from '@/types/api.ts';
+import { Login, User, OrderType, ResultData, Dept, MenuType, Role } from '@/types/api.ts';
 
 export default {
   /**
@@ -135,5 +135,33 @@ export default {
    */
   delMenuById(params: MenuType.DelParams) {
     return request.post('/menu/delete', params);
+  },
+  /**
+   * 获取角色列表
+   * @param params
+   */
+  getRoleList(params?: Role.Params) {
+    return request.get<ResultData<Role.RoleItem>>('/role/list', params);
+  },
+  /**
+   * 创建角色
+   * @param params
+   */
+  createRole(params: Role.CreateParams) {
+    return request.post('/role/create', params);
+  },
+  /**
+   * 修改角色
+   * @param params
+   */
+  editRole(params: Role.EditParams) {
+    return request.post('/role/edit', params);
+  },
+  /**
+   * 删除角色
+   * @param params
+   */
+  delRoleById(params: Role.EditParams) {
+    return request.post('/role/delete', params);
   }
 };

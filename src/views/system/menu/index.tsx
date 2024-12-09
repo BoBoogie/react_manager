@@ -122,6 +122,7 @@ const MenuList: React.FC = () => {
             await api.createMenu(params);
             message.success('新增菜单成功!');
             createModal.destroy();
+            await getMenuList();
           }}
           onCancel={() => {
             createModal.destroy();
