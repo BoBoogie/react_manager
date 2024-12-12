@@ -1,8 +1,9 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Button, MenuProps, theme } from 'antd';
-import { Switch, Dropdown, Breadcrumb } from 'antd';
+import { Switch, Dropdown } from 'antd';
 import { Layout } from 'antd';
 import useStore from '@/store';
+import BreadCrumb from '@/layout/Header/BreadCrumb.tsx';
 const LayoutHeader = () => {
   const {
     token: { colorBgContainer }
@@ -11,14 +12,6 @@ const LayoutHeader = () => {
   const userInfo = useStore(state => state.userInfo);
   const collapsed = useStore(state => state.collapsed);
   const setCollapsed = useStore(state => state.setCollapsed);
-  const breadList = [
-    {
-      title: '首页'
-    },
-    {
-      title: '关于'
-    }
-  ];
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -39,7 +32,7 @@ const LayoutHeader = () => {
         <Button type="text" onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button>
-        <Breadcrumb className="ml-[5px]" items={breadList}></Breadcrumb>
+        <BreadCrumb></BreadCrumb>
       </div>
       <div>
         <Switch className="mr-5" checkedChildren="暗黑" unCheckedChildren="默认"></Switch>

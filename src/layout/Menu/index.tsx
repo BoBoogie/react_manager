@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import { HomeOutlined, DesktopOutlined, SettingOutlined, TeamOutlined, HeatMapOutlined, SendOutlined, MenuOutlined, TrademarkCircleOutlined } from '@ant-design/icons';
+import { DesktopOutlined, SettingOutlined, TeamOutlined, HeatMapOutlined, SendOutlined, MenuOutlined, TrademarkCircleOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useStore from '@/store';
 import { useEffect, useState } from 'react';
@@ -9,11 +9,11 @@ const LayoutMenu = () => {
   const { pathname } = useLocation();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const items = [
-    {
-      key: '/welcome',
-      icon: <HomeOutlined />,
-      label: '首页'
-    },
+    // {
+    //   key: '/welcome',
+    //   icon: <HomeOutlined />,
+    //   label: '首页'
+    // },
     {
       key: '/dashboard',
       icon: <DesktopOutlined />,

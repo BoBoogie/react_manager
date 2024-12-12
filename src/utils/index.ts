@@ -1,6 +1,7 @@
 /**
  * 工具函数封装
  */
+import { MenuType } from '@/types/api.ts';
 
 // 格式化金额
 export const formatMoney = (num?: number | string) => {
@@ -42,4 +43,19 @@ export const formatDate = (date?: Date | string, rule?: string) => {
     // fmt = fmt.replace(new RegExp(`(${k})`), ('00' + val).substring(val.length));
   }
   return fmt;
+};
+
+// 递归查找书店路径
+export const findTreeNode = (tree: MenuType.MenuItem[], pathName: string, path: string[]): string[] => {
+  if (!tree) return [];
+  for (const data of tree) {
+    path.push(data.menuName);
+    if (data.path === pathName) return path;
+    if (data.children?.length) {
+      const list = findTreeNode(data.children, pathName, path);
+      if (list?.length) return list;
+    }
+    path.pop();
+  }
+  return [];
 };

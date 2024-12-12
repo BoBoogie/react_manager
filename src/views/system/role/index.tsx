@@ -75,7 +75,7 @@ const RoleList: React.FC = () => {
       render(record) {
         return (
           <Space>
-            <Button type="text" onClick={() => createHandler(record)}>
+            <Button type="text" onClick={() => createHandler(record._id)}>
               新增
             </Button>
             <Button type="text" onClick={() => editHandler(record)}>
@@ -99,7 +99,7 @@ const RoleList: React.FC = () => {
     form.resetFields();
     getRoleList();
   };
-  const createHandler = async (record?: Role.RoleItem) => {
+  const createHandler = async (record: Role.RoleItem) => {
     const createModal = modal.confirm({
       title: <div>新增角色</div>,
       width: 800,
