@@ -45,7 +45,7 @@ export const formatDate = (date?: Date | string, rule?: string) => {
   return fmt;
 };
 
-// 递归查找书店路径
+// 递归查找树节点路径（输入/user，返回系统管理/用户列表）
 export const findTreeNode = (tree: MenuType.MenuItem[], pathName: string, path: string[]): string[] => {
   if (!tree) return [];
   for (const data of tree) {
