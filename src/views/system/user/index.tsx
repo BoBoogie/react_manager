@@ -3,9 +3,9 @@ import type { ColumnsType } from 'antd/es/table';
 import { User } from '@/types/api.ts';
 import React, { useEffect, useRef, useState } from 'react';
 import api from '@/api';
-import CreateUser from '@/views/system/user/CreateUser.tsx';
+import CreateUser from '@/views/system/user/create-user';
 import { IAction } from '@/types/modal.ts';
-import { message, modal } from '@/utils/AntdGlobal.tsx';
+import { message, modal } from '@/components/antd-global';
 import { formatDate } from '@/utils';
 
 const UserList = () => {

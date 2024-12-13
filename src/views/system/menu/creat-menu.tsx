@@ -7,7 +7,7 @@ interface CreateMenuProps {
   onCancel: () => void;
   info?: MenuType.MenuItem;
 }
-const CreateMenu: React.FC<CreateMenuProps> = ({ info, onOk, onCancel }) => {
+const CreatMenu: React.FC<CreateMenuProps> = ({ info, onOk, onCancel }) => {
   const [form] = Form.useForm();
   useEffect(() => {
     form.setFieldsValue(info);
@@ -85,4 +85,4 @@ const CreateMenu: React.FC<CreateMenuProps> = ({ info, onOk, onCancel }) => {
     </div>
   );
 };
-export default CreateMenu;
+export default CreatMenu;

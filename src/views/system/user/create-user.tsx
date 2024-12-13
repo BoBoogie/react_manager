@@ -2,7 +2,7 @@ import type { GetProp, UploadProps } from 'antd';
 import { Form, Input, Modal, Select, Upload } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useImperativeHandle, useState } from 'react';
-import { message } from '@/utils/AntdGlobal.tsx';
+import { message } from '@/components/antd-global';
 import { IAction, IModelProp } from '@/types/modal.ts';
 import { User } from '@/types/api.ts';
 import api from '@/api';

@@ -1,4 +1,4 @@
-import useCharts from '@/hook/useCharts.tsx';
+import useCharts from '@/hooks/use-charts.tsx';
 import { useEffect, useState } from 'react';
 import { OrderType } from '@/types/api.ts';
 import api from '@/api';
@@ -40,8 +40,7 @@ const RadarChart = () => {
         <Button type="primary" onClick={refreshHandler}>
           刷新
         </Button>
-      }
-    >
+      }>
       <div ref={RadarChartRef} className="h-[400px]"></div>
     </Card>
   );

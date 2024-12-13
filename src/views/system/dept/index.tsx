@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 import api from '@/api';
 import { formatDate } from '@/utils';
 import { IAction } from '@/types/modal.ts';
-import { modal } from '@/utils/AntdGlobal.tsx';
-import CreateDept from '@/views/system/dept/CreateDept.tsx';
+import { modal } from '@/components/antd-global';
+import CreateDept from '@/views/system/dept/create-dept';
 
 const DeptList = () => {
   const [form] = Form.useForm();

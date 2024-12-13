@@ -1,9 +1,9 @@
 import axios, { AxiosError } from 'axios';
-import { showLoading, hideLoading } from './Loading';
+import { showLoading, hideLoading } from '@/components/loading';
 import storage from '@/utils/storage.ts';
 import env from '@/config';
 import { Result } from '@/types/api.ts';
-import { message } from '@/utils/AntdGlobal';
+import { message } from '@/components/antd-global';
 
 const instance = axios.create({
   timeout: 8000,

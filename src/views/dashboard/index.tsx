@@ -4,9 +4,9 @@ import api from '@/api';
 import { useEffect, useState } from 'react';
 import { OrderType } from '@/types/api.ts';
 import { formatMoney, formatNum } from '@/utils';
-import LineChart from '@/views/dashboard/Echarts/LineChart.tsx';
-import PieChart from '@/views/dashboard/Echarts/PieChart.tsx';
-import RadarChart from '@/views/dashboard/Echarts/RadarChart.tsx';
+import LineChart from '@/views/dashboard/echarts/line-chart';
+import PieChart from '@/views/dashboard/echarts/pie-chart';
+import RadarChart from '@/views/dashboard/echarts/radar-chart';
 
 const Dashboard = () => {
   const userInfo = useStore(state => state.userInfo);

@@ -3,7 +3,7 @@ import { Button, MenuProps, theme } from 'antd';
 import { Switch, Dropdown } from 'antd';
 import { Layout } from 'antd';
 import useStore from '@/store';
-import BreadCrumb from '@/layout/Header/BreadCrumb.tsx';
+import BreadCrumb from '@/components/breadcrumb.tsx';
 const LayoutHeader = () => {
   const {
     token: { colorBgContainer }

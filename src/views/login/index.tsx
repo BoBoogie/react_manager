@@ -1,6 +1,6 @@
 import classes from './login.module.scss';
 import loginLeft from '@/assets/images/login_left.svg';
-import LoginForm from '@/views/login/LoginForm/LoginForm.tsx';
+import LoginForm from '@/views/login/login-form';
 
 const Login = () => {
   return (

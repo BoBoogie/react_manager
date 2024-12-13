@@ -4,8 +4,8 @@ import { formatDate } from '@/utils';
 import { ColumnsType } from 'antd/es/table';
 import { Role } from '@/types/api.ts';
 import api from '@/api';
-import { message, modal } from '@/utils/AntdGlobal.tsx';
-import CreateRole from '@/views/system/role/CreateRole.tsx';
+import { message, modal } from '@/components/antd-global';
+import CreateRole from '@/views/system/role/create-role';
 
 const RoleList: React.FC = () => {
   const [form] = Form.useForm();

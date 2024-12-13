@@ -3,7 +3,7 @@ import { IAction, IModelProp } from '@/types/modal.ts';
 import { useEffect, useImperativeHandle, useState } from 'react';
 import { Dept, User } from '@/types/api.ts';
 import api from '@/api';
-import { message } from '@/utils/AntdGlobal.tsx';
+import { message } from '@/components/antd-global';
 
 const CreateDept = (props: IModelProp<Dept.EditParams | { parentId: string }>) => {
   const [form] = Form.useForm();

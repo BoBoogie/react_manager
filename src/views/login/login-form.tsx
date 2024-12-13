@@ -1,7 +1,7 @@
 import { Form, Button, Input } from 'antd';
-import { message } from '@/utils/AntdGlobal';
+import { message } from '@/components/antd-global';
 import api from '@/api';
-import { Login } from '@/types/api';
+import { Login } from '@/types/api.ts';
 import storage from '@/utils/storage.ts';
 import { useState } from 'react';
 

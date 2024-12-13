@@ -3,7 +3,7 @@ import Index from '@/views/login';
 import Welcome from '@/views/welcome';
 import Dashboard from '@/views/dashboard';
 import User from '@/views/system/user';
-import Layout from '@/layout';
+import Layout from '@/components/layout';
 import Dept from '@/views/system/dept';
 import Menu from '@/views/system/menu';
 import Role from '@/views/system/role';

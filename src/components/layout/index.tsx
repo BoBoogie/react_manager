@@ -1,8 +1,8 @@
 import React from 'react';
 import { Layout, Watermark } from 'antd';
-import LayoutHeader from '@/layout/Header';
-import LayoutFooter from '@/layout/Footer';
-import LayoutMenu from '@/layout/Menu';
+import LayoutHeader from '@/components/layout/header';
+import LayoutFooter from '@/components/layout/footer';
+import LayoutMenu from '@/components/layout/menu';
 import { Outlet } from 'react-router-dom';
 import useStore from '@/store';
 

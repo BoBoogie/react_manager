@@ -4,8 +4,8 @@ import { formatDate } from '@/utils';
 import { ColumnsType } from 'antd/es/table';
 import { MenuType } from '@/types/api.ts';
 import api from '@/api';
-import CreateMenu from '@/views/system/menu/CreateMenu.tsx';
-import { message, modal } from '@/utils/AntdGlobal.tsx';
+import CreatMenu from '@/views/system/menu/creat-menu';
+import { message, modal } from '@/components/antd-global';
 
 const MenuList: React.FC = () => {
   useEffect(() => {
@@ -116,7 +116,7 @@ const MenuList: React.FC = () => {
       closable: true,
       footer: null,
       content: (
-        <CreateMenu
+        <CreatMenu
           info={record}
           onOk={async params => {
             await api.createMenu(params);
@@ -139,7 +139,7 @@ const MenuList: React.FC = () => {
       closable: true,
       footer: null,
       content: (
-        <CreateMenu
+        <CreatMenu
           info={record}
           onOk={async params => {
             await api.editMenu(params);
